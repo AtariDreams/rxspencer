@@ -1,16 +1,17 @@
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <regex.h>
 
-#include "regex.h"
+#include "utils.h"
 #include "regex2.h"
 
 /*
  - regfree - free everything
+ = extern void regfree(regex_t *);
  */
 void
-regfree(preg)
-regex_t *preg;
+regfree(regex_t *preg)
 {
 	struct re_guts *g;
 

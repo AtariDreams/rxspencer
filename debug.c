@@ -4,20 +4,17 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <regex.h>
 
-#include "regex.h"
+#include "utils.h"
 #include "regex2.h"
-
-static void s_print(struct re_guts *g, FILE *d);
-static char *regchar(int ch);
+#include "debug.ih"
 
 /*
  - regprint - print a regexp for debugging
  */
 void
-regprint(r, d)
-regex_t *r;
-FILE *d;
+regprint(regex_t *r, FILE *d)
 {
 	struct re_guts *g = r->re_g;
 	int i;
@@ -87,9 +84,7 @@ FILE *d;
  - s_print - print the strip for debugging
  */
 static void
-s_print(g, d)
-struct re_guts *g;
-FILE *d;
+s_print(struct re_guts *g, FILE *d)
 {
 	sop *s;
 	cset *cs;
@@ -215,7 +210,7 @@ FILE *d;
 			fprintf(d, ">");
 			break;
 		default:
-			fprintf(d, "!%ld(%ld)!", OP(*s), opnd);
+			fprintf(d, "!%ld(%ld)!", OP(*s), (long)opnd);
 			break;
 		}
 		if (!done)

@@ -6,11 +6,10 @@
  = int split(char *string, char *fields[], int nfields, char *sep);
  */
 int				/* number of fields, including overflow */
-split(string, fields, nfields, sep)
-char *string;
-char *fields[];			/* list is not NULL-terminated */
-int nfields;			/* number of entries available in fields[] */
-char *sep;			/* "" white, "c" single char, "ab" [ab]+ */
+split(char* string,
+char *fields[],			/* list is not NULL-terminated */
+int nfields,			/* number of entries available in fields[] */
+char *sep)			/* "" white, "c" single char, "ab" [ab]+ */
 {
 	char *p = string;
 	char c;			/* latest character */
@@ -148,9 +147,7 @@ char *sep;			/* "" white, "c" single char, "ab" [ab]+ */
  * pgm str sep n	splits str by sep n times
  */
 int
-main(argc, argv)
-int argc;
-char *argv[];
+main(int argc, char *argv[])
 {
 	char buf[512];
 	int n;
@@ -179,12 +176,8 @@ char *argv[];
 	exit(0);
 }
 
-static void
-dosplit(string, seps)
-char *string;
-char *seps;
+void dosplit(char* string, char *seps)
 {
-#	define	NF	5
 	char *fields[NF];
 	int nf;
 
@@ -192,11 +185,7 @@ char *seps;
 	print(nf, NF, fields);
 }
 
-static void
-print(nf, nfp, fields)
-int nf;
-int nfp;
-char *fields[];
+void print(int nf, int nfp, char *fields[])
 {
 	int fn;
 	int bound;
@@ -276,8 +265,7 @@ struct {
 	NULL,		NULL,	0,	{ NULL },
 };
 
-static void
-regress()
+void regress(void)
 {
 	char buf[512];
 	int n;
